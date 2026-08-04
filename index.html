@@ -21,233 +21,83 @@
             --muted: #777;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-primary); min-height: 100vh; line-height: 1.6; }
+        .typewriter { font-family: 'Special Elite', 'Courier New', monospace; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
+        .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 2rem; background: radial-gradient(ellipse at 20% 50%, rgba(229,9,20,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(212,175,55,0.05) 0%, transparent 50%), var(--bg-dark); position: relative; overflow: hidden; }
 
-        /* Typewriter font for headings and form */
-        .typewriter {
-            font-family: 'Special Elite', 'Courier New', monospace;
-        }
+        .logo-container { position: relative; z-index: 1; margin-bottom: 1rem; animation: fadeInDown 1s ease-out; }
+        .logo-container img { max-width: 320px; width: 100%; height: auto; filter: drop-shadow(0 0 30px rgba(229, 9, 20, 0.15)); transition: transform 0.3s ease; }
+        .logo-container img:hover { transform: scale(1.03); }
+        .logo-link { display: inline-block; }
 
-        /* Hero Section */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(229, 9, 20, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-                var(--bg-dark);
-            position: relative;
-            overflow: hidden;
-        }
+        .intro { max-width: 720px; text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem; }
+        .tagline { font-family: 'Special Elite', monospace; font-size: 1.05rem; color: var(--text-secondary); text-align: center; margin-bottom: 1.5rem; letter-spacing: 2px; animation: fadeInUp 1s ease-out 0.3s both; }
+        .tagline .highlight { color: var(--gold); }
 
-        .logo-container {
-            position: relative;
-            z-index: 1;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s ease-out;
-        }
+        .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; width: 100%; max-width: 760px; position: relative; z-index: 1; animation: fadeInUp 1s ease-out 0.5s both; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .form-title { font-family: 'Special Elite', monospace; font-size: 1.4rem; text-align: center; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .form-subtitle { text-align: center; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.25rem; }
 
-        .logo-container img {
-            max-width: 320px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 0 30px rgba(229, 9, 20, 0.15));
-            transition: transform 0.3s ease;
-        }
+        .actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+        .btn { padding: 0.9rem 1.25rem; border-radius: 10px; border: 1px solid var(--border); background: linear-gradient(135deg, var(--accent), #ff6b6b); color: white; text-decoration: none; font-family: 'Special Elite', monospace; letter-spacing: 1.5px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.6rem; }
+        .btn.secondary { background: transparent; border: 1px solid var(--border); color: var(--text-primary); padding: 0.6rem 1rem; text-transform: none; font-family: inherit; letter-spacing: 0; }
+        .meta { color: var(--muted); font-size: 0.9rem; text-align: center; margin-bottom: 1rem; }
 
-        .logo-container img:hover {
-            transform: scale(1.03);
-        }
-
-        .intro {
-            max-width: 720px;
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-        }
-
-        .tagline {
-            font-family: 'Special Elite', 'Courier New', monospace;
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .tagline .highlight {
-            color: var(--gold);
-        }
-
-        /* Card */
-        .form-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 760px;
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out 0.5s both;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .form-title {
-            font-family: 'Special Elite', 'Courier New', monospace;
-            font-size: 1.4rem;
-            text-align: center;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .form-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .actions {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .btn {
-            padding: 0.9rem 1.25rem;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: linear-gradient(135deg, var(--accent), #ff6b6b);
-            color: white;
-            text-decoration: none;
-            font-family: 'Special Elite', monospace;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .btn.secondary {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            padding: 0.6rem 1rem;
-            text-transform: none;
-            font-family: inherit;
-            letter-spacing: 0;
-        }
-
-        .meta {
-            color: var(--muted);
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .section {
-            background: rgba(255,255,255,0.02);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-
+        .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        .section { background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.03); }
         .section h3 { font-family: 'Special Elite', monospace; margin-bottom: 0.5rem; }
         .section ul { margin-left: 1rem; color: var(--text-secondary); }
         .section li { margin-bottom: 0.5rem; }
 
-        .socials { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; }
-        .social-link { display: inline-flex; gap: 0.5rem; align-items: center; padding: 0.4rem 0.6rem; background: rgba(255,255,255,0.02); border-radius: 8px; color: var(--text-primary); text-decoration: none; border: 1px solid rgba(255,255,255,0.03); }
-        .social-link svg { width: 18px; height: 18px; }
+        .socials { display:flex; gap:0.75rem; justify-content:center; margin-top:1rem; }
+        .social-link { display:inline-flex; gap:0.5rem; align-items:center; padding:0.4rem 0.6rem; background: rgba(255,255,255,0.02); border-radius:8px; color:var(--text-primary); text-decoration:none; border:1px solid rgba(255,255,255,0.03); }
+        .social-link svg { width:18px; height:18px; }
 
-        /* Footer */
-        .footer {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            animation: fadeIn 1s ease-out 0.8s both;
-        }
+        /* Coming soon previews */
+        .coming-soon { display:flex; gap:0.75rem; justify-content:center; margin-top:1.25rem; flex-wrap:wrap; }
+        .preview { width: 220px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); border-radius: 8px; padding: 0.6rem; text-align:left; }
+        .preview img { width:100%; border-radius:6px; height:120px; object-fit:cover; display:block; margin-bottom:0.5rem; }
+        .preview h4 { margin-bottom:0.3rem; font-size:1rem; }
+        .preview p { color:var(--text-secondary); font-size:0.85rem; margin-bottom:0.35rem; }
+        .preview .due { font-size:0.8rem; color:var(--muted); }
 
+        /* Gallery */
+        .gallery { display:grid; grid-template-columns: repeat(5, 1fr); gap:0.5rem; margin-top:1rem; }
+        .thumb { width:100%; height:96px; background:rgba(255,255,255,0.02); border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+        .thumb img { width:100%; height:100%; object-fit:cover; }
+        .gallery-note { text-align:center; color:var(--muted); font-size:0.9rem; margin-top:0.6rem; }
+
+        .request-note { color:var(--text-secondary); font-size:0.9rem; margin-top:0.6rem; }
+
+        .footer { position:relative; z-index:1; text-align:center; padding:2rem; color:var(--text-secondary); font-size:0.9rem; animation:fadeIn 1s ease-out 0.8s both; }
         .footer .heart { color: var(--accent); }
 
-        /* Age gate modal */
-        .age-gate {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 1rem;
-        }
-
-        .age-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem;
-            max-width: 520px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .age-card h2 { margin-bottom: 0.5rem; font-family: 'Special Elite', monospace; }
-        .age-card p { color: var(--text-secondary); margin-bottom: 0.75rem; }
-        .consent { text-align: left; margin: 0.5rem 0 1rem 0; }
-        .consent label { display: flex; gap: 0.5rem; align-items: center; color: var(--text-secondary); }
-        .consent input[type="checkbox"] { width: 18px; height: 18px; }
-
+        .age-gate { position:fixed; inset:0; background:rgba(0,0,0,0.85); display:flex; align-items:center; justify-content:center; z-index:2000; padding:1rem; }
+        .age-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.25rem; max-width:520px; width:100%; text-align:center; }
+        .age-card h2 { margin-bottom:0.5rem; font-family:'Special Elite', monospace; }
+        .age-card p { color:var(--text-secondary); margin-bottom:0.75rem; }
+        .consent { text-align:left; margin:0.5rem 0 1rem 0; }
+        .consent label { display:flex; gap:0.5rem; align-items:center; color:var(--text-secondary); }
+        .consent input[type="checkbox"] { width:18px; height:18px; }
         .age-actions { display:flex; gap:0.5rem; justify-content:center; margin-top:0.5rem; }
 
         /* Animations */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInDown { from { opacity:0; transform:translateY(-30px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
         /* Responsive */
-        @media (max-width: 800px) {
-            .columns { grid-template-columns: 1fr; }
-            .logo-container img { max-width: 260px; }
-        }
+        @media (max-width: 1100px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 800px) { .columns { grid-template-columns: 1fr; } .logo-container img { max-width:260px; } .preview { width: 45%; } .gallery { grid-template-columns: repeat(2, 1fr); } }
     </style>
 <base target="_blank">
 </head>
 <body>
     <div class="hero" id="mainContent" aria-hidden="true">
         <div class="logo-container">
-            <img src="logo.png" alt="Jozi Nites Watchers Logo">
+            <a href="/" class="logo-link" aria-label="Home"><img src="logo.png" alt="Jozi Nites Watchers Logo"></a>
         </div>
 
         <p class="intro">Welcome to Jozi Nites Watchers — a friendly crew who sync up to watch films together, celebrate community, and keep things respectful and consensual. Join us, but first confirm you're 18+ and accept our privacy & community terms.</p>
@@ -260,8 +110,8 @@
 
             <div class="actions">
                 <!-- Replace the Google Form URL below with your real form link -->
-                <a class="btn" href="https://forms.gle/REPLACE_WITH_YOUR_FORM" id="googleFormBtn">Sign up (Google Form)</a>
-                <a class="btn secondary" href="https://watchtogether.online/#4x0ky6" id="enterWatchRoom">Enter Watch Room</a>
+                <a class="btn" id="googleFormBtn" href="https://forms.gle/REPLACE_WITH_YOUR_FORM" target="_blank" rel="noopener noreferrer">Sign up (Google Form)</a>
+                <a class="btn secondary" href="https://watchtogether.online/#4x0ky6" id="enterWatchRoom" target="_blank" rel="noopener noreferrer">Enter Watch Room</a>
             </div>
 
             <p class="meta">Tip: After signing up we recommend opening the watch room and joining the chat so you can sync with the crew.</p>
@@ -309,6 +159,40 @@
                     WhatsApp Group
                 </a>
             </div>
+
+            <!-- Coming soon previews -->
+            <div class="coming-soon" aria-label="Coming Soon Previews">
+                <div class="preview">
+                    <img src="images/coming1.jpg" alt="Coming Soon 1">
+                    <h4>Midnight Tension</h4>
+                    <p>Short: A slow-burn thriller about secrets at a secluded guesthouse.</p>
+                    <div class="due">Due: 2026-09-12</div>
+                </div>
+                <div class="preview">
+                    <img src="images/coming2.jpg" alt="Coming Soon 2">
+                    <h4>City Lights Afterhours</h4>
+                    <p>Short: A romantic drama tangled with late-night cinema culture.</p>
+                    <div class="due">Due: 2026-09-19</div>
+                </div>
+                <div class="preview">
+                    <img src="images/coming3.jpg" alt="Coming Soon 3">
+                    <h4>Velvet Echoes</h4>
+                    <p>Short: Experimental short exploring memory, music and midnight drives.</p>
+                    <div class="due">Due: 2026-10-03</div>
+                </div>
+            </div>
+
+            <!-- Gallery -->
+            <div class="gallery" aria-label="Gallery of recent picks">
+                <div class="thumb"><img src="images/thumb1.jpg" alt="Thumb 1"></div>
+                <div class="thumb"><img src="images/thumb2.jpg" alt="Thumb 2"></div>
+                <div class="thumb"><img src="images/thumb3.jpg" alt="Thumb 3"></div>
+                <div class="thumb"><img src="images/thumb4.jpg" alt="Thumb 4"></div>
+                <div class="thumb"><img src="images/thumb5.jpg" alt="Thumb 5"></div>
+            </div>
+            <div class="gallery-note">Coming soon preview thumbnails — upload images to /images/ and update captions in index.html if you want different titles.</div>
+
+            <div class="request-note">Want to request a movie? In the Google Form include a "Request Movie & Date" section with space for up to 3 requests (Title + Preferred Date). See FORM_INSTRUCTIONS.md for exact field names.</div>
 
         </div>
     </div>
@@ -383,23 +267,12 @@
 
         // Support keyboard accessibility
         ageGate.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                // Do nothing — don't allow bypassing age gate
-                e.preventDefault();
-            }
+            if (e.key === 'Escape') { e.preventDefault(); }
         });
 
-        // Google Form button: inform the user that it opens in new tab
-        document.getElementById('googleFormBtn').addEventListener('click', function() {
-            // nothing fancy here; the link opens in new tab because of base target
-        });
+        // Google Form button: nothing to do here (opens in new tab via target)
 
-        // Make sure the Enter Watch Room opens in new tab as intended
-        document.getElementById('enterWatchRoom').addEventListener('click', function(e) {
-            // allow default behaviour
-        });
-
-        // Small enhancement: announce when main content becomes available for screen readers
+        // Announce when content becomes available for screen readers
         const observer = new MutationObserver((mutations) => {
             for (const m of mutations) {
                 if (m.attributeName === 'aria-hidden' && mainContent.getAttribute('aria-hidden') === 'false') {
