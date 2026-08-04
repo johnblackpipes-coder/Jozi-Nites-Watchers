@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jozi Nites Watchers – Invite</title>
+  <meta name="description" content="Jozi Nites Watchers – Lekker movies. Naughty nights. Perfect sync." />
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --accent: #f5c518;
+      --accent-hover: #ffd84d;
+      --text: #f0f0f0;
+      --muted: #aaaaaa;
+      --border: #333;
+      --success: #2ecc71;
+      --danger: #e74c3c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Age Gate */
+    #age-gate {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    #age-gate.hidden {
+      display: none;
+    }
+
+    .gate-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 30px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    .gate-card h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .gate-card p {
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-size: 1.05rem;
+    }
+
+    .gate-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--muted);
+      background: #222;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+
+    .card h2 {
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2 span {
+      font-size: 1.4rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      color: #ddd;
+    }
+
+    ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .rules li::before {
+      content: "•";
+      color: var(--accent);
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .link-item {
+      background: #222;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+      display: block;
+    }
+
+    .link-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .link-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+    }
+
+    .link-item span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #111;
+      color: var(--text);
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      header h1 {
+        font-size: 1.9rem;
+      }
+    }
+
+    .submit-area {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .submit-area .btn {
+      width: 100%;
+      max-width: 320px;
+      padding: 16px;
+      font-size: 1.1rem;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Success state */
+    #success-message {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    #success-message.show {
+      display: block;
+    }
+
+    #success-message h2 {
+      color: var(--success);
+      margin-bottom: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AGE GATE -->
+  <div id="age-gate">
+    <div class="gate-card">
+      <h1>Jozi Nites Watchers</h1>
+      <p>This space is for adults in the community.<br>You must be <strong>18 years or older</strong> to continue.</p>
+      <div class="gate-buttons">
+        <button class="btn btn-primary" onclick="passAge()">I am 18 or older</button>
+        <button class="btn btn-secondary" onclick="denyAge()">I am under 18</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div id="main-content" class="hidden">
+    <div class="container">
+      <header>
+        <h1>Jozi Nites Watchers</h1>
+        <p>Lekker movies. Naughty nights. Perfect sync.</p>
+      </header>
+
+      <!-- RULES -->
+      <div class="card">
+        <h2><span>📜</span> House Rules</h2>
+        <ul class="rules">
+          <li>Respect every Black voice in the room. No racism, colorism, or anti-Blackness of any kind.</li>
+          <li>Keep it clean enough for the group — no unsolicited adult content unless the host explicitly opens that space.</li>
+          <li>One conversation at a time when voice is on. Don’t talk over people.</li>
+          <li>No spam, no links without asking, no self-promo unless invited.</li>
+          <li>What happens in the room stays in the room. Don’t record or share without clear consent.</li>
+          <li>Hosts have the final say. If asked to cool it or leave, do so with grace.</li>
+        </ul>
+      </div>
+
+      <!-- GUIDES -->
+      <div class="card">
+        <h2><span>🧭</span> How to Join & Watch</h2>
+        <ul>
+          <li><strong>Step 1:</strong> Fill the short form below and hit Submit.</li>
+          <li><strong>Step 2:</strong> You’ll get the current room link (or instructions) after submitting.</li>
+          <li><strong>Step 3:</strong> Open the link on any modern browser (Chrome, Edge, Firefox, Safari).</li>
+          <li><strong>Step 4:</strong> Enter a display name and join the room. Video and chat stay in sync for everyone.</li>
+          <li><strong>Tip:</strong> Use headphones and a stable connection for the best experience.</li>
+        </ul>
+      </div>
+
+      <!-- USEFUL LINKS -->
+      <div class="card">
+        <h2><span>🔗</span> Useful Links</h2>
+        <div class="links-grid">
+          <a class="link-item" href="https://opentogethertube.com/" target="_blank" rel="noopener">
+            <strong>OpenTogetherTube</strong>
+            <span>Fast free watch party – no account needed</span>
+          </a>
+          <a class="link-item" href="https://watchparty.me/" target="_blank" rel="noopener">
+            <strong>WatchParty.me</strong>
+            <span>Video + text chat + screen share</span>
+          </a>
+          <a class="link-item" href="https://tessro.com/" target="_blank" rel="noopener">
+            <strong>Tessro</strong>
+            <span>Private local-file sync (great for movies)</span>
+          </a>
+          <a class="link-item" href="https://meet.jit.si/" target="_blank" rel="noopener">
+            <strong>Jitsi Meet</strong>
+            <span>Free video call backup if needed</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- SHORT FORM -->
+      <div class="card" id="form-card">
+        <h2><span>✍️</span> Quick Join Form</h2>
+        <form id="join-form" onsubmit="handleSubmit(event)">
+          <div>
+            <label for="displayName">Display Name *</label>
+            <input type="text" id="displayName" name="displayName" required placeholder="What should we call you?" maxlength="40" />
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="ageConfirm">Age Confirmation *</label>
+              <select id="ageConfirm" name="ageConfirm" required>
+                <option value="">Select...</option>
+                <option value="18+">I am 18 or older</option>
+                <option value="under">I am under 18</option>
+              </select>
+            </div>
+            <div>
+              <label for="platform">Preferred Platform</label>
+              <select id="platform" name="platform">
+                <option value="opentogethertube">OpenTogetherTube</option>
+                <option value="watchparty">WatchParty.me</option>
+                <option value="tessro">Tessro (local files)</option>
+                <option value="any">Whatever the host picks</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="message">Anything we should know? (optional)</label>
+            <textarea id="message" name="message" placeholder="Allergies to certain vibes, preferred movie genres, accessibility needs..." maxlength="300"></textarea>
+          </div>
+
+          <div class="submit-area">
+            <button type="submit" class="btn btn-primary">Submit & Start →</button>
+            <p class="note">By submitting you agree to the House Rules above.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS MESSAGE -->
+      <div id="success-message">
+        <h2>You’re in, family 👑</h2>
+        <p style="margin-bottom: 24px; color: var(--muted);">Welcome to Jozi Nites Watchers. Here’s what to do next:</p>
+        <div class="card" style="text-align: left;">
+          <p style="margin-bottom: 16px;"><strong>Current recommended room:</strong></p>
+          <p style="margin-bottom: 20px;">
+            <a href="https://opentogethertube.com/" target="_blank" rel="noopener" style="color: var(--accent); font-size: 1.1rem;">
+              → Open OpenTogetherTube and create / join the room the host shares
+            </a>
+          </p>
+          <p style="color: var(--muted); font-size: 0.95rem;">
+            The host will drop the exact room link in the group chat or reply to your form submission.  
+            Keep this tab open or bookmark it so you can come back anytime.
+          </p>
+        </div>
+        <button class="btn btn-secondary" style="margin-top: 20px;" onclick="resetForm()">Submit another response</button>
+      </div>
+    </div>
+
+    <footer>
+      Jozi Nites Watchers · Lekker movies. Naughty nights. Perfect sync. · Free forever
+    </footer>
+  </div>
+
+  <script>
+    // Safe storage helpers (works even when localStorage is blocked by sandbox)
+    function safeSet(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {
+        // Sandboxed or private mode – ignore
+      }
+    }
+
+    function safeGet(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Age gate logic
+    function passAge() {
+      safeSet('bwp_age_verified', 'true');
+      document.getElementById('age-gate').classList.add('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
+    }
+
+    function denyAge() {
+      alert('Sorry, this space is for adults 18+. Come back when you are of age.');
+      window.location.href = 'https://www.google.com';
+    }
+
+    // Check if already verified (only works when storage is available)
+    if (safeGet('bwp_age_verified') === 'true') {
+      document.getElementById('age-gate').classList.add('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
+    }
+
+    // Form handling (client-side only – no backend needed)
+    function handleSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('displayName').value.trim();
+      const age = document.getElementById('ageConfirm').value;
+      const platform = document.getElementById('platform').value;
+      const message = document.getElementById('message').value.trim();
+
+      if (age === 'under') {
+        alert('You must be 18 or older to join.');
+        return;
+      }
+
+      // Try to store locally (fails silently if storage is blocked)
+      try {
+        const entry = {
+          name,
+          age,
+          platform,
+          message,
+          timestamp: new Date().toISOString()
+        };
+        let submissions = JSON.parse(safeGet('bwp_submissions') || '[]');
+        submissions.push(entry);
+        safeSet('bwp_submissions', JSON.stringify(submissions));
+      } catch (err) {
+        // Ignore storage errors
+      }
+
+      // Show success
+      document.getElementById('form-card').classList.add('hidden');
+      document.getElementById('success-message').classList.add('show');
+
+      // Scroll to success
+      document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      document.getElementById('join-form').reset();
+      document.getElementById('form-card').classList.remove('hidden');
+      document.getElementById('success-message').classList.remove('show');
+    }
+  </script>
+</body>
+</html>
