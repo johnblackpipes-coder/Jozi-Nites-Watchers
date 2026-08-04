@@ -71,6 +71,14 @@
 
         .request-note { color:var(--text-secondary); font-size:0.9rem; margin-top:0.6rem; }
 
+        /* Quick requests form */
+        .quick-requests { margin-top:1rem; background: rgba(255,255,255,0.02); padding:0.9rem; border-radius:10px; border:1px solid rgba(255,255,255,0.03); }
+        .quick-requests h4 { font-family: 'Special Elite', monospace; margin-bottom:0.5rem; }
+        .rq-grid { display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem; }
+        .rq-field { display:flex; flex-direction:column; gap:0.25rem; }
+        .rq-field input { padding:0.45rem 0.6rem; border-radius:6px; border:1px solid var(--border); background:var(--input-bg); color:var(--text-primary); }
+        .rq-actions { margin-top:0.6rem; display:flex; gap:0.6rem; align-items:center; }
+
         .footer { position:relative; z-index:1; text-align:center; padding:2rem; color:var(--text-secondary); font-size:0.9rem; animation:fadeIn 1s ease-out 0.8s both; }
         .footer .heart { color: var(--accent); }
 
@@ -90,7 +98,7 @@
 
         /* Responsive */
         @media (max-width: 1100px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 800px) { .columns { grid-template-columns: 1fr; } .logo-container img { max-width:260px; } .preview { width: 45%; } .gallery { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 800px) { .columns { grid-template-columns: 1fr; } .logo-container img { max-width:260px; } .preview { width: 45%; } .gallery { grid-template-columns: repeat(2, 1fr); } .rq-grid { grid-template-columns: 1fr; } }
     </style>
 <base target="_blank">
 </head>
@@ -192,7 +200,47 @@
             </div>
             <div class="gallery-note">Coming soon preview thumbnails — upload images to /images/ and update captions in index.html if you want different titles.</div>
 
-            <div class="request-note">Want to request a movie? In the Google Form include a "Request Movie & Date" section with space for up to 3 requests (Title + Preferred Date). See FORM_INSTRUCTIONS.md for exact field names.</div>
+            <!-- Quick Request form -->
+            <form id="quickRequests" class="quick-requests" aria-label="Quick Request Movie and Date">
+                <h4>Request Movie &amp; Date (up to 3)</h4>
+                <div class="rq-grid">
+                    <div class="rq-field">
+                        <label for="r1_title">Request 1 — Title</label>
+                        <input id="r1_title" name="r1_title" type="text" placeholder="Movie title">
+                    </div>
+                    <div class="rq-field">
+                        <label for="r1_date">Request 1 — Preferred Date</label>
+                        <input id="r1_date" name="r1_date" type="date" placeholder="YYYY-MM-DD">
+                    </div>
+
+                    <div class="rq-field">
+                        <label for="r2_title">Request 2 — Title</label>
+                        <input id="r2_title" name="r2_title" type="text" placeholder="Movie title">
+                    </div>
+                    <div class="rq-field">
+                        <label for="r2_date">Request 2 — Preferred Date</label>
+                        <input id="r2_date" name="r2_date" type="date" placeholder="YYYY-MM-DD">
+                    </div>
+
+                    <div class="rq-field">
+                        <label for="r3_title">Request 3 — Title</label>
+                        <input id="r3_title" name="r3_title" type="text" placeholder="Movie title">
+                    </div>
+                    <div class="rq-field">
+                        <label for="r3_date">Request 3 — Preferred Date</label>
+                        <input id="r3_date" name="r3_date" type="date" placeholder="YYYY-MM-DD">
+                    </div>
+                </div>
+
+                <div class="rq-actions">
+                    <button class="btn" type="submit">Save Requests</button>
+                    <!-- Replace with your Google Form URL when ready -->
+                    <a class="btn secondary" id="completeSignup" href="https://forms.gle/REPLACE_WITH_YOUR_FORM" target="_blank" rel="noopener noreferrer">Complete Signup (Google Form)</a>
+                    <div style="color:var(--muted);font-size:0.85rem;margin-left:6px;">Saved locally — remember to complete the full signup in the Google Form.</div>
+                </div>
+            </form>
+
+            <div class="request-note">Want to request a movie? In the Google Form include a "Request Movie &amp; Date" section with space for up to 3 requests (Title + Preferred Date). See FORM_INSTRUCTIONS.md for exact field names.</div>
 
         </div>
     </div>
@@ -232,7 +280,7 @@
         function lockScroll() { document.documentElement.style.overflow = 'hidden'; document.body.style.overflow = 'hidden'; }
         function unlockScroll() { document.documentElement.style.overflow = ''; document.body.style.overflow = ''; }
 
-        // Check localStorage
+        // Check localStorage for age acceptance
         const accepted = localStorage.getItem('jozi_age_accepted');
         if (accepted === '1') {
             ageGate.style.display = 'none';
@@ -260,17 +308,36 @@
             unlockScroll();
         });
 
-        ageDeclineBtn.addEventListener('click', function() {
-            // Redirect to a safe page or close tab
-            window.location.href = 'about:blank';
-        });
+        ageDeclineBtn.addEventListener('click', function() { window.location.href = 'about:blank'; });
 
         // Support keyboard accessibility
-        ageGate.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { e.preventDefault(); }
-        });
+        ageGate.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.preventDefault(); } });
 
-        // Google Form button: nothing to do here (opens in new tab via target)
+        // Quick Requests form behaviour — saves to localStorage
+        const quickForm = document.getElementById('quickRequests');
+        quickForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const data = {
+                r1_title: document.getElementById('r1_title').value.trim(),
+                r1_date: document.getElementById('r1_date').value,
+                r2_title: document.getElementById('r2_title').value.trim(),
+                r2_date: document.getElementById('r2_date').value,
+                r3_title: document.getElementById('r3_title').value.trim(),
+                r3_date: document.getElementById('r3_date').value
+            };
+
+            // Store locally so organisers can retrieve from the browser (or extend to POST to a server)
+            localStorage.setItem('jozi_quick_requests', JSON.stringify(data));
+
+            // Brief feedback
+            const oldText = this.querySelector('button[type="submit"]').textContent;
+            this.querySelector('button[type="submit"]').textContent = 'Saved';
+            setTimeout(() => { this.querySelector('button[type="submit"]').textContent = oldText; }, 1800);
+
+            // Optional: open the Google Form if user wants to complete signup
+            // window.open(document.getElementById('completeSignup').href, '_blank');
+        });
 
         // Announce when content becomes available for screen readers
         const observer = new MutationObserver((mutations) => {
