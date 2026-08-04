@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jozi Nites Watchers — Lekker Movies. Naughty Nights. Perfectly Sync.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --accent: #e50914;
+            --accent-hover: #b20710;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a3a3a3;
+            --border: #2a2a2a;
+            --input-bg: #1a1a1a;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Typewriter font for headings and form */
+        .typewriter {
+            font-family: 'Special Elite', 'Courier New', monospace;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(229, 9, 20, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo-container img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 30px rgba(229, 9, 20, 0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.03);
+        }
+
+        .tagline {
+            font-family: 'Special Elite', 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .tagline .highlight {
+            color: var(--gold);
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            border-radius: 16px 16px 0 0;
+        }
+
+        .form-title {
+            font-family: 'Special Elite', 'Courier New', monospace;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Special Elite', 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #555;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent), #ff6b6b);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Special Elite', 'Courier New', monospace;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn::after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .submit-btn:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .footer .heart {
+            color: var(--accent);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Film grain overlay */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-card {
+                padding: 1.5rem;
+                margin: 0 1rem;
+            }
+            .logo-container img {
+                max-width: 240px;
+            }
+            .tagline {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="grain"></div>
+
+    <section class="hero">
+        <div class="logo-container">
+            <img src="logo.png" alt="Jozi Nites Watchers Logo">
+        </div>
+
+        <p class="tagline">
+            <span class="highlight">Lekker</span> movies. 
+            <span class="highlight">Naughty</span> nights. 
+            <span class="highlight">Perfectly</span> sync.
+        </p>
+
+        <div class="form-card">
+            <h2 class="form-title">Join the Watch Party</h2>
+            <p class="form-subtitle">Enter your details to sync up with the crew</p>
+
+            <form id="watchForm" action="https://watchtogether.online/#4x0ky6" method="GET">
+                <div class="form-group">
+                    <label for="displayName">Display Name(s)</label>
+                    <input 
+                        type="text" 
+                        id="displayName" 
+                        name="displayName" 
+                        placeholder="e.g. John, Sarah & Mike" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="socialHandle">Social Media Handle(s)</label>
+                    <input 
+                        type="text" 
+                        id="socialHandle" 
+                        name="socialHandle" 
+                        placeholder="e.g. @johndoe, @sarahjozi" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="you@example.com" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="submit-btn">Enter Watch Room</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Made with <span class="heart">♥</span> in Jozi · Jozi Nites Watchers © 2026</p>
+    </footer>
+
+    <script>
+        // Smooth form submission with validation feedback
+        document.getElementById('watchForm').addEventListener('submit', function(e) {
+            const btn = this.querySelector('.submit-btn');
+            btn.style.transform = 'scale(0.98)';
+            btn.textContent = 'Syncing...';
+
+            // Allow normal form submission to redirect
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 150);
+        });
+
+        // Add subtle input focus effects
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.01)';
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
